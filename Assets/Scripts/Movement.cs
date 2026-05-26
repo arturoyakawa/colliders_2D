@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class Movement : MonoBehaviour
 {
@@ -67,13 +69,26 @@ public class Movement : MonoBehaviour
         rb.linearVelocityY = vertical * jumpPower;
     }
 
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D touch)
     {
-        
+        string tag = touch.gameObject.tag;
+        if (tag == "objects")
+        {
+            Debug.Log("stupid box");
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        string tag = collision.gameObject.tag;
+        if (tag == "objects")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnCollisionExit2D()
     {
-
+            
     }
 }
